@@ -1,0 +1,180 @@
+[
+  {
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "_avsDirectory",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_stakeRegistry",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_rewardsCoordinator",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_delegationManager",
+        "type": "address",
+        "internalType": "address"
+      },
+      {
+        "name": "_allocationManager",
+        "type": "address",
+        "internalType": "address"
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "createNewTask",
+    "inputs": [
+      {
+        "name": "name",
+        "type": "string",
+        "internalType": "string"
+      }
+    ],
+    "outputs": [
+      {
+        "name": "",
+        "type": "tuple",
+        "internalType": "struct IHelloWorldServiceManager.Task",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "taskCreatedBlock",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "respondToTask",
+    "inputs": [
+      {
+        "name": "task",
+        "type": "tuple",
+        "internalType": "struct IHelloWorldServiceManager.Task",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "taskCreatedBlock",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      },
+      {
+        "name": "referenceTaskIndex",
+        "type": "uint32",
+        "internalType": "uint32"
+      },
+      {
+        "name": "signature",
+        "type": "bytes",
+        "internalType": "bytes"
+      }
+    ],
+    "outputs": [],
+    "stateMutability": "nonpayable"
+  },
+  {
+    "type": "function",
+    "name": "latestTaskNum",
+    "inputs": [],
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint32",
+        "internalType": "uint32"
+      }
+    ],
+    "stateMutability": "view"
+  },
+  {
+    "type": "event",
+    "name": "NewTaskCreated",
+    "inputs": [
+      {
+        "name": "taskIndex",
+        "type": "uint32",
+        "indexed": true,
+        "internalType": "uint32"
+      },
+      {
+        "name": "task",
+        "type": "tuple",
+        "indexed": false,
+        "internalType": "struct IHelloWorldServiceManager.Task",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "taskCreatedBlock",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
+    "name": "TaskResponded",
+    "inputs": [
+      {
+        "name": "taskIndex",
+        "type": "uint32",
+        "indexed": true,
+        "internalType": "uint32"
+      },
+      {
+        "name": "task",
+        "type": "tuple",
+        "indexed": false,
+        "internalType": "struct IHelloWorldServiceManager.Task",
+        "components": [
+          {
+            "name": "name",
+            "type": "string",
+            "internalType": "string"
+          },
+          {
+            "name": "taskCreatedBlock",
+            "type": "uint32",
+            "internalType": "uint32"
+          }
+        ]
+      },
+      {
+        "name": "operator",
+        "type": "address",
+        "indexed": false,
+        "internalType": "address"
+      }
+    ],
+    "anonymous": false
+  }
+]
