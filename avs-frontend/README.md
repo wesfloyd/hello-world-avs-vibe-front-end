@@ -40,6 +40,7 @@ npm run start:operator
 
 ```
 cd avs-frontend
+npm install
 npm start
 ```
 

@@ -1,10 +1,18 @@
-# Hello World AVS
+# Hello World AVS ~ Vibe Coded AVS Frontend ~
 
-Welcome to the Hello World AVS. This project shows you the simplest functionality you can expect from an AVS. It will give you a concrete understanding of the basic components. For new users, please find [this video walkthrough](https://drive.google.com/file/d/1P6uA6kYWCbpeorTjADuoTlQ-q8uqwPZf/view?usp=sharing) of the hello world AVS repository.
+Welcome to the Hello World AVS fork with a vibe coded front end. Please see the video recording of this project [here](https://x.com/weswfloyd/status/1908267994033353206) and the parent project [here](https://github.com/Layr-Labs/hello-world-avs) for more background.
+
+<div align="center">
+<img src="./assets/hello-world-vibe-frontend.png" width="500px" alt="Hello World Frontend Screenshot" />
+</div>
+
+
 
 ## Architecture
 
-![hello-world-png](./assets/hello-world-diagramv2.png)
+<div align="center">
+<img src="./assets/hello-world-diagramv2.png" width="600px" alt="Hello World Architecture Diagram" />
+</div>
 
 ### AVS User Flow
 
@@ -16,26 +24,12 @@ Welcome to the Hello World AVS. This project shows you the simplest functionalit
 
 That's it. This simple flow highlights some of the core mechanics of how AVSs work.
 
-### Slashing
-
-> [!WARNING]
-> This example does not use the new operator-sets workflow. Please refer to [ELIP-002](https://github.com/eigenfoundation/ELIPs/blob/main/ELIPs/ELIP-002.md) for more details.
-> For an example of the new workflow, check out the Incredible Squaring examples ([Go version here](https://github.com/Layr-Labs/incredible-squaring-avs), [Rust version here](https://github.com/Layr-Labs/incredible-squaring-avs-rs)).
-
-The example includes a simple slashing condition: "a task MUST be responded by enough operators before N blocks have passed since the task creation". You can modify the `OPERATOR_RESPONSE_PERCENTAGE` value in the `.env` file to adjust the chance of an operator responding to a task.
-In case this condition isn't satisfied by some operator, anyone can permissionlessly slash them via calling `HelloWorldServiceManager.slashOperator`.
-
-For the [Rust example](#quick-start-rust), we have a `challenger` that listens for new tasks and checks whether the operators have responded. If not, `challenger` is authorized to slash the operator.
-
-## Local Devnet Deployment
-
-The following instructions explain how to manually deploy the AVS from scratch including EigenLayer and AVS specific contracts using Foundry (forge) to a local anvil chain, and start Typescript Operator application and tasks.
 
 ## Development Environment
 
 This section describes the tooling required for local development.
 
-### Non-Nix Environment
+
 
 Install dependencies:
 
@@ -47,15 +41,7 @@ Install dependencies:
 - [Foundry](https://getfoundry.sh/)
 - [ethers](https://www.npmjs.com/package/ethers)
 
-### Nix Environment 
 
-On [Nix](https://nixos.org/) platforms, if you already have the proper Nix configuration, you can build the project's artifacts inside a `nix develop` shell
-
-``` sh
-nix develop
-```
-
-Otherwise, please refer to [installed and configured](./docs/nix-setup-guide.md) section.
 
 ## Quick start (TypeScript)
 
@@ -102,124 +88,16 @@ npm run start:operator
 Open a separate terminal window #3, execute the following commands
 
 ```sh
-# Start the createNewTasks application 
-npm run start:traffic
+# Start the frontend
+cd avs-frontend
+npm install
+npm start
 ```
 
-### Create and Claim Distribution
 
-In a terminal, start a new instance of anvil and deploy the core and avs contracts
 
-```sh
-# Start anvil
-npm run start:anvil
-# Deploy the EigenLayer contracts
-npm run deploy:core
 
-# Deploy the Hello World AVS contracts
-npm run deploy:hello-world
 
-```
-
-In another terminal, run:
-
-```sh
-# Create distribution roots
-npm run create-distributions-root
-
-# Claim created distribution
-npm run claim-distributions
-```
-
-To run operator directed rewards distribution, run:
-
-```sh
-#Create distribution roots
-npm run create-operator-directed-distributions-root
-
-# Claim created rewards distribution
-npm run claim-distributions
-```
-
-## Quick start (Rust)
-
-For Rust example, we have a simple operator that monitors new tasks and responds to them, a spammer that generates random tasks and a challeger that listens for new tasks and checks the operators response, [if found that operator did not respond to the task](#slashing), it will slash the operator.
-
-### Anvil Deployment
-
-1. Start Anvil Chain
-
-In terminal window #1, execute the following commands:
-
-```sh
-# Start local anvil chain
-anvil
-```
-
-2. Deploy Contracts
-
-Open a separate terminal window #2, execute the following commands
-
-```sh
-# Setup .env file
-cp .env.example .env
-cp contracts/.env.example contracts/.env
-
-# Builds the contracts
-make build-contracts
-
-# Deploy the EigenLayer contracts
-make deploy-eigenlayer-contracts
-
-# Deploy the Hello World AVS contracts
-make deploy-helloworld-contracts
-```
-
-3. Start Challenge Manager
-
-In terminal window #2, execute the following command
-
-```sh
-# Start the Challenge Manager
-make start-rust-challenger
-```
-
-4. Start Rust Operator
-
-In terminal window #3, execute the following command
-
-```sh
-# Start the Operator
-make start-rust-operator
-```
-
-5. Spam Tasks
-
-Open a separate terminal window #4, execute the following command
-
-```sh
-# Start sending tasks
-make spam-rust-tasks
-```
-
-### Testing
-
-1. Build anvil state with deployed contracts
-
-```sh
-# Build contracts
-make build-contracts
-
-# Starts anvil in the background with the --dump-state flag, builds and deploys the 
-# contracts, and generates a state.json file for use in tests.
-make build-anvil-state-with-deployed-contracts
-```
-
-2. Run tests
-
-```sh
-cargo test --workspace
-```
 
 ## Help and Support
 
@@ -245,15 +123,3 @@ If you're planning to build an AVS and would like to speak with a member of the 
 - This repo is meant currently intended for _local anvil development testing_. Holesky deployment support will be added shortly.
 - Users who wish to build an AVS for Production purposes will want to migrate from the `ECDSAServiceManagerBase` implementation in `HelloWorldServiceManager.sol` to a BLS style architecture using [RegistryCoordinator](https://github.com/Layr-Labs/eigenlayer-middleware/blob/dev/docs/RegistryCoordinator.md).
 
-## Appendix (Future Capabilities In Progress)
-
-### Adding a New Strategy
-
-### Potential Enhancements to the AVS (for learning purposes)
-
-The architecture can be further enhanced via:
-
-- the nature of the request is more sophisticated than generating a constant string
-- the operators might need to coordinate with each other
-- the type of signature is different based on the constraints of the service
-- the type and amount of security used to secure the AVS

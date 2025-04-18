@@ -34,3 +34,4 @@ yarn.lock
 contracts/deployments/
 
 **/.DS_Store
+/avs-frontend/public/deployments/
